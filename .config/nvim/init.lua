@@ -128,10 +128,6 @@ require('lazy').setup({
   {
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
   },
 
   {
@@ -244,8 +240,6 @@ vim.o.formatoptions = vim.o.formatoptions:gsub("[cro]", "")
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.keymap.set('n', '<Tab>', '<cmd>bn<cr>', { silent = true })
-vim.keymap.set('n', '<S-Tab>', '<cmd>bp<cr>', { silent = true })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -544,6 +538,22 @@ cmp.setup {
   }, { { name = 'buffer' } }),
   preselect = 'None',
 }
+
+local bufferline = require('bufferline')
+bufferline.setup{
+  options = {
+    mode="buffers",
+    numbers = "buffer_id",
+  },
+}
+
+-- Theme
+local onedark = require('onedark')
+onedark.setup{
+  style='warmer'
+}
+onedark.load()
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
