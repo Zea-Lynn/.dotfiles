@@ -42,6 +42,11 @@ plugins=(
 
 alias vi=nvim
 
+export EDITOR="vi"
+export VISUAL="vi"
+export TERMINAL="konsole"
+export Browser="brave"
+
 source $ZSH/oh-my-zsh.sh
 
 # The following lines were added by compinstall
@@ -74,3 +79,6 @@ export CMAKE_GENERATOR=Ninja
 
 # Odin
 export PATH=$PATH:$HOME/Odin/
+
+#Andriod
+export PATH=$PATH:/opt/android-sdk/platform-tools
