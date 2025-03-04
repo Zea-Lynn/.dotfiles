@@ -1,0 +1,21 @@
+stow
+git
+zsh
+gdb
+cmake
+ninja
+make
+neovim
+opendoas
+openssh
+tmux
+wl-clipboard
+
+# Graphical
+Hyprland
+waybar
+keepassxc
+blender
+mpv
+foot
+brave

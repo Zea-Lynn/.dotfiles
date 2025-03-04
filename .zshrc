@@ -1,70 +1,48 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export EDITOR="vi"
+export VISUAL="vi"
+alias vi=nvim
+export TERMINAL="konsole"
+export Browser="brave"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+#Scripts and stuff
+export PATH="$PATH:~/.local/bin"
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+[ -d "$XDG_STATE_HOME/zsh" ] || mkdir -p "$XDG_STATE_HOME/zsh"
+export ZDOTDIR=$XDG_STATE_HOME/zsh
+[ -d "$XDG_CACHE_HOME/zsh" ] || mkdir -p "$XDG_CACHE_HOME/zsh"
+HISTFILE=$XDG_CACHE_HOME/zsh/histfile
+HISTSIZE=10000
+SAVEHIST=10000
+setopt hist_ignore_dups       # ignore duplicated commands history list
+bindkey -v
+
+#oh-my-zsh
+export ZSH=$XDG_STATE_HOME/oh-my-zsh
+
+# https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="candy"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
 HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
-# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
 COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 plugins=(
     gitfast
 )
 
-alias vi=nvim
-
-export EDITOR="vi"
-export VISUAL="vi"
-export TERMINAL="konsole"
-export Browser="brave"
-
 source $ZSH/oh-my-zsh.sh
 
 # The following lines were added by compinstall
-
-zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate cache-path "$XDG_CACHE_PATH/zsh/zcompcache"
 zstyle :compinstall filename "$HOME/.zshrc"
-
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
-setopt hist_ignore_dups       # ignore duplicated commands history list
-bindkey -v
-
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 #日本語
 export GTK_IM_MODULE=fcitx
@@ -77,8 +55,22 @@ export TERM=rxvt-256color
 #cmake
 export CMAKE_GENERATOR=Ninja
 
+#go 
+export GOPATH=$HOME/.local/share/go
+export GOROOT=$HOME/.local/share/go
+
+#Rust 🤮
+export CARGO_HOME=$HOME/.local/share/cargo
+# export CARGO_TARGET_DIR="/path/to/new/target/directory"
+
 # Odin
-export PATH=$PATH:$HOME/Odin/
+export PATH=$PATH:$HOME/.local/share/odin
 
 #Andriod
 export PATH=$PATH:/opt/android-sdk/platform-tools
+
+#GDB
+export GDBHISTFILE="$XDG_DATA_HOME"/gdb/history
+
+#Hyprland
+ELECTRON_OZONE_PLATFORM_HINT=auto
