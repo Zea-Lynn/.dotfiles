@@ -1,0 +1,10 @@
+#!/bin/sh
+
+source "${PWD}/.zshenv"
+ln -s "${PWD}/.zshenv" -t "$HOME"
+ln -s "${PWD}/zsh"     -t "$XDG_STATE_HOME"
+ln -s "${PWD}/foot"    -t "$XDG_CONFIG_HOME"
+ln -s "${PWD}/gdb"     -t "$XDG_CONFIG_HOME"
+ln -s "${PWD}/hypr"    -t "$XDG_CONFIG_HOME"
+ln -s "${PWD}/nvim"    -t "$XDG_CONFIG_HOME"
+ln -s "${PWD}/tmux"    -t "$XDG_CONFIG_HOME"

@@ -2,5 +2,5 @@ dotfiles
 ========
 
 ```bash
-stow .
+./settup
 ```

@@ -1,5 +1,0 @@
-#!/bin/sh
-
-bookmark="$(wl-paste -p)"
-
-echo $bookmark >> ~/.dotfiles/bookmarks.txt
