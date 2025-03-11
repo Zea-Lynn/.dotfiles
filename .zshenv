@@ -11,7 +11,7 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export ZDOTDIR="$XDG_STATE_HOME/zsh"
 
 #Scripts and stuff
-export PATH="$PATH:~/.local/bin"
+export PATH="$PATH:~/.dotfiles/scripts"
 
 #日本語
 export GTK_IM_MODULE=fcitx
@@ -20,6 +20,9 @@ export XMODIFIERS=@im=fcitx
 
 #color
 export TERM=rxvt-256color
+export CLICOLOR_FORCE=1
+export CMAKE_COLOR_DIAGNOSTICS=ON
+export QT_QPA_PLATFORMTHEME=qt6ct
 
 #cmake
 export CMAKE_GENERATOR=Ninja

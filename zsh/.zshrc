@@ -21,14 +21,10 @@ plugins=(
 )
 source $ZSH/oh-my-zsh.sh
 
-
-[ -d "$XDG_CACHE_HOME/zsh/zcompcache" ] || mkdir -p "$XDG_CACHE_HOME/zsh/zcompcache" 
-# The following lines were added by compinstall
-zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache completer _expand _complete _ignored _correct _approximate
 zstyle :compinstall filename "$HOME/.zshrc"
 autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
 
 #Hyprland
 ELECTRON_OZONE_PLATFORM_HINT=auto

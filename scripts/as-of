@@ -1,0 +1,3 @@
+#!/bin/sh
+LANG=C 
+date +"%B %d %Y" | xargs echo as of  
