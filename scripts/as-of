@@ -1,3 +1,4 @@
 #!/bin/sh
 LANG=C 
-date +"%B %d %Y" | xargs echo as of  
+NAME=$(git config --get user.name)
+date +"%B %d %Y" | xargs echo @$NAME as of  

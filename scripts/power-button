@@ -1,0 +1,9 @@
+#!/bin/sh
+CHOICE=$(printf "suspend\n lock\n shutdown\n" | tofi)
+
+case "$CHOICE" in
+        "shutdown") echo shutdowning ;;
+        "suspend") exec systemctl suspend ;;
+        "lock")echo lock;;
+        *);;
+esac

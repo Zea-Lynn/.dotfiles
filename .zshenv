@@ -11,7 +11,7 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export ZDOTDIR="$XDG_STATE_HOME/zsh"
 
 #Scripts and stuff
-export PATH="$PATH:~/.dotfiles/scripts"
+export PATH="$PATH:$HOME/.dotfiles/scripts"
 
 #日本語
 export GTK_IM_MODULE=fcitx
@@ -43,3 +43,6 @@ export PATH="$PATH:/opt/android-sdk/platform-tools"
 
 #GDB
 export GDBHISTFILE="$XDG_DATA_HOME"/gdb/history
+
+#Pico
+export PICO_SDK_PATH="$HOME/workspace/pico-sdk"
