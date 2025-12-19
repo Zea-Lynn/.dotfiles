@@ -33,7 +33,10 @@ export GOROOT="$XDG_DATA_HOME/go"
 
 #Rust 🤮
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
-# export CARGO_TARGET_DIR="/path/to/new/target/directory"
+
+#why does this not support xdg directories, why does microsoft fail at even the smalles things.
+#C shart💩 and dot nut
+export PATH="$PATH:/home/scromble/.dotnet/tools"
 
 # Odin
 export PATH="$PATH:$XDG_DATA_HOME/odin"
@@ -46,3 +49,7 @@ export GDBHISTFILE="$XDG_DATA_HOME"/gdb/history
 
 #Pico
 export PICO_SDK_PATH="$HOME/workspace/pico-sdk"
+
+#C/C++
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++

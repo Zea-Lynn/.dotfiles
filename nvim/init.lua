@@ -129,11 +129,21 @@ require('lazy').setup({
     },
   },
 
+  -- {
+  --   -- Theme inspired by Atom
+  --   'navarasu/onedark.nvim',
+  -- },
+  --Theme
+  { 'ellisonleao/gruvbox.nvim'},
   {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
+      'MeanderingProgrammer/render-markdown.nvim',
+      dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+      -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+      -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+      ---@module 'render-markdown'
+      ---@type render.md.UserConfig
+      opts = {},
   },
-
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -429,7 +439,7 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  clangd = {},
+  clangd = { cmd = { 'clangd', '--background-index=0'} },
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
@@ -450,45 +460,24 @@ require('neodev').setup()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
--- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
+for name, value in pairs(servers) do
+  vim.lsp.config(name, {
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = servers[name]
+  })
+end
 
-mason_lspconfig.setup {
+require('mason').setup()
+-- Ensure the servers above are installed
+
+require('mason-lspconfig').setup {
   ensure_installed = vim.tbl_keys(servers),
 }
 
 local function toSnakeCase(str)
   return string.gsub(str, "%s*[- ]%s*", "_")
 end
-
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    if server_name == 'omnisharp' then
-      require('lspconfig')[server_name].setup {
-        capabilities = capabilities,
-        on_attach = function(client, buffer)
-          local tokenModifiers = client.server_capabilities.semanticTokensProvider.legend.tokenModifiers
-          for i, v in ipairs(tokenModifiers) do
-            tokenModifiers[i] = toSnakeCase(v)
-          end
-          local tokenTypes = client.server_capabilities.semanticTokensProvider.legend.tokenTypes
-          for i, v in ipairs(tokenTypes) do
-            tokenTypes[i] = toSnakeCase(v)
-          end
-
-          on_attach(client, buffer)
-        end,
-        settings = servers[server_name],
-      }
-    else
-      require('lspconfig')[server_name].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = servers[server_name],
-      }
-    end
-  end,
-}
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
@@ -547,13 +536,70 @@ bufferline.setup{
   },
 }
 
--- Theme
-local onedark = require('onedark')
-onedark.setup{
-  style='warmer'
-}
-onedark.load()
+require('gruvbox').setup({
+      terminal_colors = true, -- add neovim terminal colors
+      undercurl = true,
+      underline = true,
+      bold = true,
+      italic = {
+        strings = true,
+        emphasis = true,
+        comments = true,
+        operators = false,
+        folds = true,
+      },
+      strikethrough = true,
+      invert_selection = false,
+      invert_signs = false,
+      invert_tabline = false,
+      inverse = true, -- invert background for search, diffs, statuslines and errors
+      contrast = "soft", -- can be "hard", "soft" or empty string
+      palette_overrides = {},
+      overrides = {},
+      dim_inactive = true,
+      transparent_mode = true,
+})
 
+vim.o.background = 'dark'
+vim.cmd([[colorscheme gruvbox]])
+
+
+--As of command
+vim.api.nvim_create_user_command(
+  "Asof",
+    function()
+    local handle = io.popen("as-of")
+    if not handle then return end
+    vim.api.nvim_put({handle:read("*a")}, "c", true, true)
+  end,
+  {}
+)
+
+vim.api.nvim_create_user_command(
+  "ClangdPico",
+  function()
+    local lspconfig = require("lspconfig")
+
+    -- Stop existing clangd clients
+    for _, client in pairs(vim.lsp.get_active_clients()) do
+      if client.name == "clangd" then
+        client.stop(true)
+      end
+    end
+
+    -- Re-setup clangd with the extra argument
+    lspconfig.clangd.setup({
+      cmd = {
+        "clangd",
+        "--query-driver=/usr/bin/arm-none-eabi-*",
+      },
+    })
+
+    -- Restart LSP for current buffer
+    vim.cmd("LspStart clangd")
+  end,
+  {}
+)
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
