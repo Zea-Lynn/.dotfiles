@@ -29,7 +29,6 @@ export CMAKE_GENERATOR=Ninja
 
 #go 
 export GOPATH="$XDG_DATA_HOME/go"
-export GOROOT="$XDG_DATA_HOME/go"
 
 #Rust 🤮
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
