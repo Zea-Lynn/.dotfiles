@@ -66,6 +66,7 @@ require('lazy').setup({
           map('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
           map('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
           map('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
+
           -- Create a command `:Format` local to the LSP buffer
           vim.api.nvim_buf_create_user_command(event.buf, 'Format', function(_)
             vim.lsp.buf.format()
@@ -468,6 +469,8 @@ require('lazy').setup({
       local filetypes = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim',
         'vimdoc' }
       require('nvim-treesitter').install(filetypes)
+      require('nvim-treesitter.install').compilers = { "zig" }
+
       vim.api.nvim_create_autocmd('FileType', {
         pattern = filetypes,
         callback = function()
@@ -539,7 +542,6 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
-
 
 local function toSnakeCase(str)
   return string.gsub(str, "%s*[- ]%s*", "_")
