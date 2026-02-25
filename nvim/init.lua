@@ -167,6 +167,7 @@ require('lazy').setup({
       local servers = {
         clangd = {},
         gopls = {},
+        ['lua-language-server'] = {},
       }
 
       local ensure_installed = vim.tbl_keys(servers or {})
@@ -321,14 +322,14 @@ require('lazy').setup({
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-     require('mini.surround').setup({
+      require('mini.surround').setup({
         mappings = {
-          add = 'gsa', -- Add surrounding in Normal and Visual modes
-          delete = 'gsd', -- Delete surrounding
-          find = 'gsf', -- Find surrounding (to the right)
+          add = 'gsa',       -- Add surrounding in Normal and Visual modes
+          delete = 'gsd',    -- Delete surrounding
+          find = 'gsf',      -- Find surrounding (to the right)
           find_left = 'gsF', -- Find surrounding (to the left)
           highlight = 'gsh', -- Highlight surrounding
-          replace = 'gsr', -- Replace surrounding
+          replace = 'gsr',   -- Replace surrounding
           suffix_last = 'l', -- Suffix to search with "prev" method
           suffix_next = 'n', -- Suffix to search with "next" method
         },
@@ -472,7 +473,8 @@ require('lazy').setup({
     -- NOTE: If you are having trouble with this installation,
     --       refer to the README for telescope-fzf-native for more instructions.
 
-    run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+    run =
+    'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
     build = 'make',
     cond = function()
       return vim.fn.executable 'make' == 1
@@ -486,10 +488,10 @@ require('lazy').setup({
     },
     build = ":TSUpdate",
     config = function()
-
       -- [[ Configure Treesitter ]]
       -- See `:help nvim-treesitter`
       require('nvim-treesitter.config').setup {
+        install_dir = vim.fn.stdpath('data') .. 'site/',
         -- Add languages to be installed here that you want installed for treesitter
         ensure_installed = { 'html', 'javascript', 'css', 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'c_sharp', 'odin', 'glsl', 'zig' },
 
