@@ -1,0 +1,33 @@
+[submodule "repos/slurp"]
+	path = repos/slurp
+	url = https://github.com/emersion/slurp.git
+[submodule "repos/b_to_c_str"]
+	path = repos/b_to_c_str
+	url = git@github.com:Zea-Lynn/b_to_c_str.git
+[submodule "repos/dwl"]
+	path = repos/dwl
+	url = git@github.com:Zea-Lynn/dwl.git
+[submodule "repos/fastfetch"]
+	path = repos/fastfetch
+	url = https://github.com/fastfetch-cli/fastfetch.git
+[submodule "repos/fcitx5"]
+	path = repos/fcitx5
+	url = https://github.com/fcitx/fcitx5.git
+[submodule "repos/grim"]
+	path = repos/grim
+	url = https://git.sr.ht/~emersion/grim
+[submodule "repos/neovim"]
+	path = repos/neovim
+	url = git@github.com:neovim/neovim.git
+[submodule "repos/nsxiv"]
+	path = repos/nsxiv
+	url = https://github.com/nsxiv/nsxiv.git
+[submodule "repos/tofi"]
+	path = repos/tofi
+	url = https://github.com/philj56/tofi.git
+[submodule "repos/wl-gammarelay"]
+	path = repos/wl-gammarelay
+	url = https://github.com/jeremija/wl-gammarelay.git
+[submodule "repos/wlroots"]
+	path = repos/wlroots
+	url = git@github.com:Zea-Lynn/wlroots.git

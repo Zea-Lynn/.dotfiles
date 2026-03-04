@@ -1,6 +1,8 @@
 export EDITOR="vi"
 export VISUAL="vi"
 export TERMINAL="foot"
+export MENU="tofi"
+export MENU_RUN="tofi-drun"
 export Browser="brave"
 
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -11,7 +13,7 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export ZDOTDIR="$XDG_STATE_HOME/zsh"
 
 #Scripts and stuff
-export PATH="$PATH:$HOME/.dotfiles/scripts"
+export PATH="$PATH:$HOME/.dotfiles/utilities"
 
 #日本語
 export GTK_IM_MODULE=fcitx
