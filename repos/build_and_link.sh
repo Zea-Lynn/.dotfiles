@@ -7,19 +7,38 @@ MESON_BUILD_COMMAND="meson setup build
         -Dc_args=\"-O3 -march=native -mtune=native\" 
         -Dc_link_args=\"-O3 -march=native\""
 
-cd b_to_c_str/
+(cd b_to_c_str
 echo $PWD
 echo $BUILD_B_TO_C_STR_COMMAND
 echo $($BUILD_B_TO_C_STR_COMMAND)
-cd ../
-cd ../
-ln -s "${PWD}/repos/b_to_c_str/b_to_c_str" "${PWD}/utilities/b_to_c_str" 
-cd repos
+)
 
-cd wlroots
+wait
+
+(cd wlroots
 echo $PWD
 echo $MESON_BUILD_COMMAND
 echo $(eval "$MESON_BUILD_COMMAND")
 echo $(ninja -C build)
-cd ../..
+)
+
+wait
+
+(cd dwl
+echo $PWD
+echo $(make)
+)
+
+(cd nvim
+
+)
+
+(
+
+)
+
+(cd ../
+ln -s "${PWD}/repos/b_to_c_str/b_to_c_str" "${PWD}/utilities/b_to_c_str"
+ln -s "${PWD}/repos/dwl/dwl" "${PWD}/utilities/dwl"
+)
 
